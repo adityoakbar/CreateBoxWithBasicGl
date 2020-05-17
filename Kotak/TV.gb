@@ -1,0 +1,97 @@
+Dim Pkamx#, Pkamy#
+Dim kecepatan#=0.8   
+Dim tekstur
+tekstur = loadmipmaptexture("")
+
+glenable(gl_texture_2d)
+
+while true  
+glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+glLoadIdentity()
+gltranslatef(0,0,-5)  
+glRotatef(Pkamy#,0,0,1)
+glRotatef(Pkamx#,1,0,0)
+
+glbindtexture(gl_texture_2d, tekstur)
+glBegin(gl_quads)     'belakang 
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(-1,-1,-1)  'kiri bawah
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(-1,1,-1)     'kiri atas
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(1,1,-1)       'kanan atas
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(1,-1,-1)       'kanan bawah
+glEnd()   
+
+glBegin(gl_quads)    'depan
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(-1,-1,1)     'kiri bawah 
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(-1,1,1)      'kiri atas
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(1,1,1)       'kanan atas 
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(1,-1,1)      'kanan bawah
+glEnd()
+
+glBegin(gl_quads)  'atas  
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(-1,1,1)
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(-1,1,-1)  
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(1,1,-1)
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(1,1,1)
+glEnd()
+
+glBegin(gl_quads)  'bawah  
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(-1,-1,1)
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(-1,-1,-1)  
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(1,-1,-1)
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(1,-1,1)
+glEnd()
+
+glBegin(gl_quads)  'kiri  
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(-1,-1,-1)
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(-1,1,-1)  
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(-1,1,1)
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(-1,-1,1)
+glEnd()         
+
+glBegin(gl_quads)  'kanan  
+    glTexCoord2f(0.0, 0.0)
+    glVertex3f(1,-1,-1)
+    glTexCoord2f(0.0, 1.0)
+    glVertex3f(1,1,-1)  
+    glTexCoord2f(1.0, 1.0)
+    glVertex3f(1,1,1)
+    glTexCoord2f(1.0, 0.0)
+    glVertex3f(1,-1,1)
+glEnd()
+
+   
+
+swapBuffers()
+
+if scankeydown(VK_RIGHT) Then
+    Pkamy# = Pkamy#+kecepatan# 
+elseif scankeydown(VK_LEFT) Then 
+    Pkamy# = Pkamy#+kecepatan#   
+elseif scankeydown(VK_UP) Then 
+    Pkamx# = Pkamx#+kecepatan#
+elseif scankeydown(VK_DOWN) Then 
+    Pkamx# = Pkamx#-kecepatan#
+endif 
+
+wend
+
